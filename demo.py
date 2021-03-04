@@ -21,6 +21,8 @@ if __name__ == "__main__":
         cls_num_per_lane = 18
     elif cfg.dataset == 'Tusimple':
         cls_num_per_lane = 56
+    elif cfg.dataset == 'AVT':
+        cls_num_per_lane = 18
     else:
         raise NotImplementedError
 
@@ -53,6 +55,11 @@ if __name__ == "__main__":
         datasets = [LaneTestDataset(cfg.data_root,os.path.join(cfg.data_root, split),img_transform = img_transforms) for split in splits]
         img_w, img_h = 1280, 720
         row_anchor = tusimple_row_anchor
+    elif cfg.dataset == 'AVT':
+        splits = ['cadillac_ct6.txt']
+        datasets = [LaneTestDataset(cfg.data_root,os.path.join(cfg.data_root, split),img_transform = img_transforms) for split in splits]
+        img_w, img_h = 1280, 720
+        row_anchor = culane_row_anchor
     else:
         raise NotImplementedError
     for split, dataset in zip(splits, datasets):
